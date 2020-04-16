@@ -1,4 +1,4 @@
-package com.erasr.max_heap;
+package com.erasr.heap_and_priorityqueue;
 
 public class Array<E> {
 
@@ -10,6 +10,13 @@ public class Array<E> {
     public Array(int capacity) {
         data = (E[])new Object[capacity];
         size = 0;
+    }
+    public Array(E[] arr) {
+        data = (E[])new Object[arr.length];
+        for(int i = 0; i < arr.length; i++) {
+            data[i] = arr[i];
+        }
+        size = arr.length;
     }
 
     public Array() {
@@ -156,6 +163,17 @@ public class Array<E> {
             newData[i] = data[i];
         }
         data = newData;
+    }
+
+    //交换两个元素
+    public void swap(int i, int j) {
+        if(i < 0 || i >= size || j < 0 || j >= size) {
+            throw new IllegalArgumentException("Index is Illegal!");
+        }
+
+        E t = data[i];
+        data[i] = data[j];
+        data[j] = t;
     }
 
     @Override
