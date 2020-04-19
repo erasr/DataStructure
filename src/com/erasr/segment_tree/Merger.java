@@ -1,4 +1,5 @@
 package com.erasr.segment_tree;
 
-public interface Merger {
+public interface Merger<E> {
+    E merge(E a, E b);
 }

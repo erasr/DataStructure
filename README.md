@@ -10,7 +10,7 @@
 |  二分搜索树| ✅ [Java](src/com/erasr/bst)|
 | 集合和映射 |✅ [Java](src/com/erasr/set_and_map) |
 | 优先队列和堆 | ✅ [Java](src/com/erasr/heap_and_priorityqueue) |
-|线段树||
+|线段树|✅ [Java](src/com/erasr/segment_tree)|
 |Trie||
 |并查集||
 |AVL||
