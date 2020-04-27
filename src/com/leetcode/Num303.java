@@ -1,4 +1,4 @@
-package com.LeetCode;
+package com.leetcode;
 
 import com.erasr.segment_tree.SegmentTree;
 
