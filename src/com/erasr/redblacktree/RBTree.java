@@ -1,35 +1,49 @@
-package com.erasr.set_and_map;
+package com.erasr.redblacktree;
 
 import java.util.ArrayList;
 
 /**
  * @program: DataStructure
- * @description: 基于二分搜索树的Map
+ * @description: 红黑树
  * @author: xuguangwei
- * @create: 2020-04-08 10:24
+ * @create: 2020-04-27 21:54
  */
-public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
+
+public class RBTree<K extends Comparable<K>, V> {
+
+    private static final boolean RED = true;
+    private static final boolean BLACK = false;
 
     private class Node {
         public K key;
         public V value;
         public Node left, right;
+        public boolean color;
 
         public Node(K key, V value) {
             this.key = key;
             this.value = value;
             left = right = null;
+            color = RED;
         }
     }
 
     private Node root;
     private int size;
-    public BSTMap() {
+    public RBTree() {
         root = null;
         size = 0;
     }
 
-    // 返回以node为根节点的二分搜索树中，key所在的节点
+    //返回节点的颜色
+    private boolean isRed(Node node) {
+        if(node == null) {
+            return BLACK;
+        }
+        return node.color;
+    }
+
+    // 返回以node为根节点的红黑树中，key所在的节点
     private Node getNode(Node node, K key) {
         if(node == null) {
             return null;
@@ -44,9 +58,53 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
         }
     }
 
-    @Override
+    //   node                     x
+    //  /   \     左旋转         /  \
+    // T1   x   --------->   node   T3
+    //     / \              /   \
+    private Node leftRotate(Node node) {
+        Node x = node.right;
+
+        // 左旋转
+        node.right = x.left;
+        x.left = node;
+
+        x.color = node.color;
+        node.color = RED;
+
+        return x;
+    }
+
+    //     node                   x
+    //    /   \     右旋转       /  \
+    //   x    T2   ------->   y   node
+    //  / \                       /  \
+    // y  T1                     T1  T2
+    private Node rightRotate(Node node){
+
+        Node x = node.left;
+
+        // 右旋转
+        node.left = x.right;
+        x.right = node;
+
+        x.color = node.color;
+        node.color = RED;
+
+        return x;
+    }
+
+    // 颜色翻转
+    private void flipColors(Node node){
+
+        node.color = RED;
+        node.left.color = BLACK;
+        node.right.color = BLACK;
+    }
+
     public void add(K key, V value) {
         root = add(root, key, value);
+        root.color = BLACK;
     }
 
     private Node add(Node node, K key, V value) {
@@ -63,18 +121,30 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
             node.value = value;
         }
 
+        if (isRed(node.right) && !isRed(node.left)) {
+            node = leftRotate(node);
+        }
+
+        if (isRed(node.left) && isRed(node.left.left)) {
+            node = rightRotate(node);
+        }
+
+        if (isRed(node.left) && isRed(node.right)) {
+            flipColors(node);
+        }
+
         return node;
     }
 
-    // 返回以node为根的二分搜索树的最小值所在的节点
+    // 返回以node为根的红黑树的最小值所在的节点
     private Node minimum(Node node){
         if(node.left == null)
             return node;
         return minimum(node.left);
     }
 
-    // 删除掉以node为根的二分搜索树中的最小节点
-    // 返回删除节点后新的二分搜索树的根
+    // 删除掉以node为根的红黑树中的最小节点
+    // 返回删除节点后新的红黑树的根
     private Node removeMin(Node node){
 
         if(node.left == null){
@@ -88,7 +158,6 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
         return node;
     }
 
-    @Override
     public V remove(K key){
 
         Node node = getNode(root, key);
@@ -144,17 +213,14 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
         }
     }
 
-    @Override
     public boolean contains(K key) {
         return getNode(root, key) != null;
     }
 
-    @Override
     public V get(K key) {
         return getNode(root, key).value;
     }
 
-    @Override
     public void set(K key, V newValue) {
         Node node = getNode(root, key);
         if (node == null) {
@@ -163,12 +229,10 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
         node.value = newValue;
     }
 
-    @Override
     public int getSize() {
         return size;
     }
 
-    @Override
     public boolean isEmpty() {
         return size == 0;
     }
@@ -181,7 +245,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
         if(FileOperation.readFile("src/com/erasr/pride-and-prejudice.txt", words)) {
             System.out.println("Total words: " + words.size());
 
-            BSTMap<String, Integer> map = new BSTMap<>();
+            RBTree<String, Integer> map = new RBTree<>();
             for (String word : words) {
                 if (map.contains(word))
                     map.set(word, map.get(word) + 1);
@@ -198,3 +262,4 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
     }
 
 }
+

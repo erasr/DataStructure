@@ -1,4 +1,6 @@
-package com.erasr.set_and_map;
+package com.erasr.redblacktree;
+
+import com.erasr.set_and_map.FileOperation;
 
 import java.util.ArrayList;
 
@@ -8,7 +10,7 @@ import java.util.ArrayList;
  * @author: xuguangwei
  * @create: 2020-04-08 10:24
  */
-public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
+public class BST<K extends Comparable<K>, V> {
 
     private class Node {
         public K key;
@@ -24,7 +26,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
 
     private Node root;
     private int size;
-    public BSTMap() {
+    public BST() {
         root = null;
         size = 0;
     }
@@ -44,7 +46,6 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
         }
     }
 
-    @Override
     public void add(K key, V value) {
         root = add(root, key, value);
     }
@@ -88,7 +89,6 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
         return node;
     }
 
-    @Override
     public V remove(K key){
 
         Node node = getNode(root, key);
@@ -144,17 +144,14 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
         }
     }
 
-    @Override
     public boolean contains(K key) {
         return getNode(root, key) != null;
     }
 
-    @Override
     public V get(K key) {
         return getNode(root, key).value;
     }
 
-    @Override
     public void set(K key, V newValue) {
         Node node = getNode(root, key);
         if (node == null) {
@@ -163,12 +160,10 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
         node.value = newValue;
     }
 
-    @Override
     public int getSize() {
         return size;
     }
 
-    @Override
     public boolean isEmpty() {
         return size == 0;
     }
@@ -181,7 +176,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
         if(FileOperation.readFile("src/com/erasr/pride-and-prejudice.txt", words)) {
             System.out.println("Total words: " + words.size());
 
-            BSTMap<String, Integer> map = new BSTMap<>();
+            BST<String, Integer> map = new BST<>();
             for (String word : words) {
                 if (map.contains(word))
                     map.set(word, map.get(word) + 1);

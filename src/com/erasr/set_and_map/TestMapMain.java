@@ -32,7 +32,7 @@ public class TestMapMain {
 
     public static void main(String[] args) {
 
-        String filename = "src/com/erasr/set_and_map/pride-and-prejudice.txt";
+        String filename = "src/com/erasr/pride-and-prejudice.txt";
 
         BSTMap<String, Integer> bstMap = new BSTMap<>();
         double time1 = testMap(bstMap, filename);

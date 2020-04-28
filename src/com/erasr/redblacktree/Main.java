@@ -1,4 +1,4 @@
-package com.erasr.avltree;
+package com.erasr.redblacktree;
 
 import java.util.ArrayList;
 
@@ -12,8 +12,7 @@ public class Main {
         if(FileOperation.readFile("src/com/erasr/pride-and-prejudice.txt", words)) {
             System.out.println("Total words: " + words.size());
 
-            //对单词进行排序
-//            Collections.sort(words);
+            // Collections.sort(words);
 
             // Test BST
             long startTime = System.nanoTime();
@@ -48,18 +47,31 @@ public class Main {
 
             for(String word: words)
                 avl.contains(word);
-            //删除测试
-//            for(String word : words) {
-//                avl.remove(word);
-//                if(!avl.isBalanced() || !avl.isBST()) {
-//                    throw new RuntimeException("ERROR");
-//                }
-//            }
 
             endTime = System.nanoTime();
 
             time = (endTime - startTime) / 1000000000.0;
             System.out.println("AVL: " + time + " s");
+
+
+            // Test RBTree
+            startTime = System.nanoTime();
+
+            RBTree<String, Integer> rbt = new RBTree<>();
+            for (String word : words) {
+                if (rbt.contains(word))
+                    rbt.set(word, rbt.get(word) + 1);
+                else
+                    rbt.add(word, 1);
+            }
+
+            for(String word: words)
+                rbt.contains(word);
+
+            endTime = System.nanoTime();
+
+            time = (endTime - startTime) / 1000000000.0;
+            System.out.println("RBTree: " + time + " s");
         }
 
         System.out.println();

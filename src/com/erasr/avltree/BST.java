@@ -1,7 +1,6 @@
 package com.erasr.avltree;
 
 import com.erasr.set_and_map.FileOperation;
-import com.erasr.set_and_map.Map;
 
 import java.util.ArrayList;
 
@@ -11,7 +10,7 @@ import java.util.ArrayList;
  * @author: xuguangwei
  * @create: 2020-04-08 10:24
  */
-public class BST<K extends Comparable<K>, V> implements Map<K, V> {
+public class BST<K extends Comparable<K>, V> {
 
     private class Node {
         public K key;
@@ -47,7 +46,6 @@ public class BST<K extends Comparable<K>, V> implements Map<K, V> {
         }
     }
 
-    @Override
     public void add(K key, V value) {
         root = add(root, key, value);
     }
@@ -91,7 +89,6 @@ public class BST<K extends Comparable<K>, V> implements Map<K, V> {
         return node;
     }
 
-    @Override
     public V remove(K key){
 
         Node node = getNode(root, key);
@@ -147,17 +144,14 @@ public class BST<K extends Comparable<K>, V> implements Map<K, V> {
         }
     }
 
-    @Override
     public boolean contains(K key) {
         return getNode(root, key) != null;
     }
 
-    @Override
     public V get(K key) {
         return getNode(root, key).value;
     }
 
-    @Override
     public void set(K key, V newValue) {
         Node node = getNode(root, key);
         if (node == null) {
@@ -166,12 +160,10 @@ public class BST<K extends Comparable<K>, V> implements Map<K, V> {
         node.value = newValue;
     }
 
-    @Override
     public int getSize() {
         return size;
     }
 
-    @Override
     public boolean isEmpty() {
         return size == 0;
     }
@@ -181,7 +173,7 @@ public class BST<K extends Comparable<K>, V> implements Map<K, V> {
         System.out.println("Pride and Prejudice");
 
         ArrayList<String> words = new ArrayList<>();
-        if(FileOperation.readFile("src/com/erasr/set_and_map/pride-and-prejudice.txt", words)) {
+        if(FileOperation.readFile("src/com/erasr/pride-and-prejudice.txt", words)) {
             System.out.println("Total words: " + words.size());
 
             BST<String, Integer> map = new BST<>();

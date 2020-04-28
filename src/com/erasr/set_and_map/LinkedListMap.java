@@ -119,7 +119,7 @@ public class LinkedListMap<K, V> implements Map<K, V> {
     public static void main(String[] args) {
         //统计「词频」
         ArrayList<String> words = new ArrayList<>();
-        if(FileOperation.readFile("src/com/erasr/set_and_map/pride-and-prejudice.txt", words)) {
+        if(FileOperation.readFile("src/com/erasr/pride-and-prejudice.txt", words)) {
             System.out.println("Total words: " + words.size());
             LinkedListMap<String, Integer> map = new LinkedListMap<>();
             for(String word : words) {

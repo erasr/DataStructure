@@ -25,7 +25,7 @@ public class TestSetMain {
 
     public static void main(String[] args) {
 
-        String filename = "src/com/erasr/set_and_map/pride-and-prejudice.txt";
+        String filename = "src/com/erasr/pride-and-prejudice.txt";
 
         BSTSet<String> bstSet = new BSTSet<>();
         double time1 = testSet(bstSet, filename);
