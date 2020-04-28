@@ -11,10 +11,10 @@
 | 集合和映射 |✅ [Java](src/com/erasr/set_and_map) |
 | 优先队列和堆 | ✅ [Java](src/com/erasr/heap_and_priorityqueue) |
 |线段树|✅ [Java](src/com/erasr/segment_tree)|
-|Trie||
+|Trie|✅ [Java](src/com/erasr/trie)|
 |并查集||
-|AVL||
-|红黑树||
+|AVL|✅ [Java](src/com/erasr/avltree)|
+|红黑树|✅ [Java](src/com/erasr/redblacktree)|
 |哈希表||
 
 **原课程链接**
