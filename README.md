@@ -12,9 +12,9 @@
 | 优先队列和堆 | ✅ [Java](src/com/erasr/heap_and_priorityqueue) |
 |线段树|✅ [Java](src/com/erasr/segment_tree)|
 |Trie|✅ [Java](src/com/erasr/trie)|
-|并查集||
+|并查集|✅ [Java](src/com/erasr/unionfind)|
 |AVL|✅ [Java](src/com/erasr/avltree)|
 |红黑树|✅ [Java](src/com/erasr/redblacktree)|
-|哈希表||
+|哈希表|✅ [Java](src/com/erasr/hashtable)|
 
 **原课程链接**
